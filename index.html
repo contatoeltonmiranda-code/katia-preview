@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- model-viewer (local, sem CDN) para o 3D interativo do hero -->
+<script type="module" src="_assets/produto/model-viewer.min.js"></script>
 <style>
 /* =====================================================================
    LP v2 — Katia Drop | tema BLACK + paleta AZUL
@@ -125,8 +127,18 @@ body.has-preview-bar{padding-top:40px}
 .hero .sub{font-size:clamp(15.5px,1.25vw,17px);max-width:540px;color:var(--texto);margin-bottom:28px}
 .hero .sub strong{color:var(--branco);font-weight:600}
 
-/* Coluna 2: vazia, so reserva altura/largura para o video respirar */
-.hero-visual{min-height:460px}
+/* Coluna 2: modelo 3D interativo do produto (girável). Fica sobre o video de fundo. */
+.hero-visual{min-height:460px;position:relative;display:flex;align-items:center;justify-content:center}
+/* Caixa de layout do 3D — SEM card de vidro. So define as dimensoes (mesmo tamanho de antes:
+   aspect-ratio 1/1, max-width 520px). 100% transparente: sem fundo, sem borda, sem sombra,
+   sem backdrop-filter, sem border-radius. O produto flutua direto sobre o fundo do hero. */
+.hero-3d-card{position:relative;z-index:1;width:100%;max-width:520px;margin:0 auto;aspect-ratio:1/1;
+  isolation:isolate;background:transparent}
+/* glow ciano suave respirando atras do produto — realce, NAO card. Sem clip (o card foi removido),
+   por isso alarga o inset e suaviza o blur/alpha para nao virar um disco obvio. */
+.hero-3d-glow{position:absolute;inset:14%;z-index:0;pointer-events:none;background:radial-gradient(ellipse 58% 54% at 52% 50%,rgba(99,218,248,.20),rgba(47,77,150,.07) 50%,transparent 74%);filter:blur(28px);animation:orbBreath 6s ease-in-out infinite}
+.hero-model{position:absolute;inset:0;z-index:1;width:100%;height:100%;--poster-color:transparent;background:transparent}
+@media(prefers-reduced-motion:reduce){.hero-3d-glow{animation:none}}
 /* Desktop: realce de brilho no video. So aparece na direita — a esquerda esta sob o scrim .97 */
 @media(min-width:961px){.hero-video{filter:brightness(1.45) contrast(1.03) saturate(1.04)}}
 /* Sem movimento: mostra so o poster (bg de .hero-media), video escondido */
@@ -596,8 +608,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
 /* ===== RESPONSIVO ===== */
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:40px}
-  /* coluna vazia some: sem ela nao ha vao morto acima do texto */
-  .hero-visual{display:none}
+  /* coluna do 3D: mostra abaixo do texto (empilhado), altura reduzida */
+  .hero-visual{display:flex;min-height:0;order:2}
+  /* caixa do 3D continua quadrada, centralizada e limitada a largura util do telefone (mesmo tamanho) */
+  .hero-3d-card{max-width:min(88vw,420px)}
   /* sem coluna livre, o scrim vira vertical e mais forte — o texto ocupa toda a largura */
   .hero-scrim{background:linear-gradient(180deg,rgba(11,14,20,.88) 0%,rgba(11,14,20,.84) 55%,rgba(13,20,36,.66) 82%,rgba(13,21,40,.46) 100%)}
   .hero-video{object-position:60% center}
@@ -680,9 +694,19 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       </div>
     </div>
 
-    <!-- Coluna 2 vazia de proposito: reserva o espaco do grid para o video aparecer nitido.
-         Some no mobile (ver responsivo) para nao criar vao morto. -->
-    <div class="hero-visual" aria-hidden="true"></div>
+    <!-- Coluna 2: modelo 3D interativo do produto (arraste para girar; gira sozinho devagar) -->
+    <div class="hero-visual">
+      <div class="hero-3d-card">
+        <div class="hero-3d-glow" aria-hidden="true"></div>
+        <model-viewer class="hero-model" id="heroModel"
+          src="_assets/produto/massage-gun-web.glb"
+          alt="Pistola massageadora em 3D — arraste para girar"
+          camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="20deg"
+          disable-zoom touch-action="pan-y" interaction-prompt="none"
+          exposure="1.1" shadow-intensity="1" environment-image="neutral"
+          camera-orbit="30deg 78deg 90%" loading="eager" reveal="auto"></model-viewer>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1267,6 +1291,19 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
     });
   },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
   Array.prototype.forEach.call(targets,function(el){io.observe(el)});
+})();
+
+/* ===== 3D do hero: em prefers-reduced-motion, desliga o giro automatico (mantem arrastar) ===== */
+(function(){
+  var mv=document.getElementById('heroModel');
+  if(!mv)return;
+  var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+  function apply(){
+    if(mq.matches)mv.removeAttribute('auto-rotate');
+    else if(!mv.hasAttribute('auto-rotate'))mv.setAttribute('auto-rotate','');
+  }
+  apply();
+  if(mq.addEventListener)mq.addEventListener('change',apply);
 })();
 </script>
 </body>
