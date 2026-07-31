@@ -76,6 +76,15 @@ section{position:relative}
 .cta-seals span::before{content:"\2713";color:var(--ciano);font-weight:800}
 .center .cta-seals{justify-content:center}
 
+/* ===== CTA DE SECAO — botao ao fim de cada secao, sempre apontando para #oferta =====
+   Reusa o .btn ja existente no tamanho padrao. O .lg fica reservado para os tres CTAs de
+   maior peso (hero, card de oferta e CTA final), que assim continuam no topo da hierarquia.
+   z-index:4 resolve de uma vez as secoes com camada por cima do conteudo: passa acima dos
+   scrims/veils (z-index:1), do conteudo (z-index:2) e das barras meia-pagina (z-index:3),
+   sem precisar de uma regra por secao. */
+.sec-cta{position:relative;z-index:4;display:flex;justify-content:center;margin-top:48px}
+@media(max-width:600px){.sec-cta{margin-top:34px}}
+
 /* ===== PLACEHOLDERS DE IMAGEM =====
    Para trocar por imagem real: substituir a div.ph inteira por
    <img class="{classe-do-slot}" id="{mesmo-id}" src="..." alt="...">
@@ -608,8 +617,9 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
 /* ===== RESPONSIVO ===== */
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:40px}
-  /* coluna do 3D: mostra abaixo do texto (empilhado), altura reduzida */
-  .hero-visual{display:flex;min-height:0;order:2}
+  /* coluna do 3D: empilhada, ela vem ACIMA do bloco de texto (order:-1). So aqui, dentro da
+     media query — a ordem do DOM segue a mesma e o desktop (>960) fica intocado. */
+  .hero-visual{display:flex;min-height:0;order:-1}
   /* caixa do 3D continua quadrada, centralizada e limitada a largura util do telefone (mesmo tamanho) */
   .hero-3d-card{max-width:min(88vw,420px)}
   /* sem coluna livre, o scrim vira vertical e mais forte — o texto ocupa toda a largura */
@@ -636,6 +646,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
   .wrap{padding:0 18px}
   .sec{padding:64px 0}
   .hero{padding:52px 0 76px}
+  /* Com o 3D em cima, o gap do grid e a caixa do produto encolhem um pouco para a headline
+     continuar dentro da primeira dobra (medido: h1 comeca a ~440px do topo em 390x844). */
+  .hero-grid{gap:26px}
+  .hero-3d-card{max-width:min(78vw,360px)}
   .hero h1{font-size:clamp(34px,9vw,44px)}
   .sec h2{font-size:clamp(28px,7.5vw,36px)}
   .btn,.btn.lg{font-size:14px;padding:17px 22px;width:100%}
@@ -652,6 +666,9 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
   .step-num{width:46px;height:46px;font-size:20px}
   .steps::before,.steps::after{left:22px}
   .price-box{padding:34px 22px}
+  /* O selo tem 200px aqui, mas a caixa tinha 300px de min-height: sobravam 50px vazios em
+     cima e 50px embaixo. Metade disso (25px + 25px) — desktop nao e tocado. */
+  .gar-visual{min-height:250px}
   .seal{width:200px;height:200px}
   .seal .seal-core{width:104px;height:104px}
   .seal .seal-core .sc-num{font-size:44px}
@@ -752,6 +769,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
     </div>
     <p class="dor-bridge sr-hidden">A tens&atilde;o acumula. O corpo cobra. E adiar a recupera&ccedil;&atilde;o s&oacute; deixa o pr&oacute;ximo dia mais pesado.<br><b>Cuidar da musculatura n&atilde;o precisa ser caro nem complicado.</b></p>
   </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero aliviar minha tens&atilde;o</a></div>
+  </div>
 </section>
 
 <!-- ============ PRODUTO (EFEITO 4: divisoria arredondada no topo) ============ -->
@@ -797,6 +818,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       </div>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero a minha pistola massageadora</a></div>
+  </div>
 </section>
 
 <!-- ============ BENEFICIOS (EFEITO 3: bento + EFEITO 2: hover blur) ============ -->
@@ -840,6 +865,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
     </div>
     <p class="disclaimer">Resultados podem variar de pessoa para pessoa. Melhores resultados com uso frequente aliado a rotina de treino e alongamento.</p>
   </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero essa mudan&ccedil;a na minha rotina</a></div>
+  </div>
 </section>
 
 <!-- ============ KIT (EFEITO 5: barras ate a metade) ============ -->
@@ -873,6 +902,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
     <div class="tips-row sr-hidden" aria-hidden="true">
       <div class="tips-track" id="tipsTrack"></div>
     </div>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero o kit completo com 20% off</a></div>
   </div>
 </section>
 
@@ -915,6 +948,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <p>Voc&ecirc; n&atilde;o fica sozinho. A gente ajuda no que precisar.</p>
       </div>
     </div>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero garantir a minha com 20% off</a></div>
   </div>
 </section>
 
@@ -961,6 +998,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       </div>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero come&ccedil;ar hoje mesmo</a></div>
+  </div>
 </section>
 
 <!-- ============ PARA QUEM E ============ -->
@@ -994,6 +1035,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       </div>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Tamb&eacute;m quero a minha</a></div>
+  </div>
 </section>
 
 <!-- ============ TRANSFORMACOES ============ -->
@@ -1021,6 +1066,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       </div>
     </div>
     <p class="transf-micro sr-hidden">Muita gente sente o relaxamento j&aacute; nas primeiras utiliza&ccedil;&otilde;es. Com uso frequente, o conforto acompanha a sua rotina.<br><em>Resultados podem variar.</em></p>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero sentir isso no meu corpo</a></div>
   </div>
 </section>
 
@@ -1119,6 +1168,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       </div>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Quero testar sem risco por 7 dias</a></div>
+  </div>
 </section>
 
 <!-- ============ FAQ ============ -->
@@ -1165,6 +1218,10 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <div class="faq-ans">Sim. O kit inclui <span class="fake wrap" title="valor fake - substituir pelo real">maleta de transporte em todas as unidades</span>, para voc&ecirc; levar e guardar tudo com praticidade.</div>
       </details>
     </div>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-cta"><a href="#oferta" class="btn">Tirei minhas d&uacute;vidas, quero comprar</a></div>
   </div>
 </section>
 
