@@ -645,10 +645,11 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
 @media(max-width:600px){
   .wrap{padding:0 18px}
   .sec{padding:64px 0}
-  .hero{padding:52px 0 76px}
-  /* Com o 3D em cima, o gap do grid e a caixa do produto encolhem um pouco para a headline
-     continuar dentro da primeira dobra (medido: h1 comeca a ~440px do topo em 390x844). */
-  .hero-grid{gap:26px}
+  .hero{padding:24px 0 76px}
+  /* R2: 3D no topo do mobile (order:-1). Reduzido o padding-top do hero (52->24) e o gap do grid
+     (26->12) para encostar melhor a imagem 3D no conteudo acima/abaixo, SEM mexer no tamanho do
+     .hero-3d-card (max-width e aspect-ratio intactos). Desktop nao tocado (regra so em <=600px). */
+  .hero-grid{gap:12px}
   .hero-3d-card{max-width:min(78vw,360px)}
   .hero h1{font-size:clamp(34px,9vw,44px)}
   .sec h2{font-size:clamp(28px,7.5vw,36px)}
