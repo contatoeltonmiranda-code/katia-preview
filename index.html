@@ -316,8 +316,8 @@ body.has-preview-bar{padding-top:40px}
 /* ===== CARROSSEL DE PONTEIRAS (ref: DIOGO .pc-row) ===== */
 .tips-row{position:relative;overflow:hidden;margin-top:40px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)}
 .tips-track{display:flex;gap:14px;width:max-content;animation:mq-scroll 42s linear infinite;will-change:transform}
-.tips-track .tip{flex-shrink:0;width:150px;height:150px;border-radius:14px;border:1px dashed rgba(99,218,248,.4);background:linear-gradient(150deg,#151922,#1B2740);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--ciano);padding:12px;letter-spacing:.4px}
-.tips-track .tip small{font-size:9.5px;color:var(--texto2);font-weight:500;letter-spacing:.3px}
+.tips-track .tip{flex-shrink:0;width:150px;height:150px;border-radius:14px;border:1px solid rgba(99,218,248,.22);background:linear-gradient(150deg,#151922,#1B2740);display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.tips-track .tip img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
 @media(hover:hover){.tips-row:hover .tips-track{animation-play-state:paused}}
 @media(prefers-reduced-motion:reduce){.tips-track{animation:none}}
 @media(max-width:560px){.tips-track .tip{width:118px;height:118px}}
@@ -1275,16 +1275,16 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
   if(mq.addEventListener)mq.addEventListener('change',apply);
 })();
 
-/* ===== Carrossel de ponteiras: monta os 8 slots + duplica para loop sem costura ===== */
+/* ===== Carrossel de ponteiras: 7 fotos reais + duplica para loop sem costura ===== */
 (function(){
   var track=document.getElementById('tipsTrack');
   if(!track)return;
-  /* Os nomes/formatos das 8 ponteiras NAO constam do briefing — placeholders neutros.
-     Quando a Katia confirmar, trocar o label de cada slot. */
+  var imgs=['ponteira-01.png','ponteira-02.png','ponteira-03.png','ponteira-04.png','ponteira-05.png','ponteira-06.png','ponteira-07.png'];
+  var base='_assets/produto/ponteiras/';
   var html='';
   for(var rep=0;rep<2;rep++){
-    for(var i=1;i<=8;i++){
-      html+='<div class="tip">PONTEIRA '+i+'<small>foto isolada</small><small>240x240</small></div>';
+    for(var i=0;i<imgs.length;i++){
+      html+='<div class="tip"><img src="'+base+imgs[i]+'" alt="Ponteira '+(i+1)+' de 7 — pistola massageadora" loading="lazy" decoding="async"></div>';
     }
   }
   track.innerHTML=html;
