@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- model-viewer (local, sem CDN) para o 3D interativo do hero -->
-<script type="module" src="_assets/produto/model-viewer.min.js"></script>
+<script type="module" src="../../_assets/produto/model-viewer.min.js"></script>
 <style>
 /* =====================================================================
    LP v2 — Katia Drop | tema BLACK + paleta AZUL
@@ -121,7 +121,7 @@ body.has-preview-bar{padding-top:40px}
 /* ===== HERO ===== */
 .hero{padding:76px 0 104px;background:var(--grad-escuro);overflow:hidden;isolation:isolate}
 /* camada 0: video full-bleed */
-.hero-media{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#101115 url('_assets/video/hero-massagem-poster.jpg') center/cover no-repeat}
+.hero-media{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#101115 url('../../_assets/video/hero-massagem-poster.jpg') center/cover no-repeat}
 .hero-video{width:100%;height:100%;object-fit:cover;object-position:center;display:block;pointer-events:none}
 /* camada 1: scrim — forte na esquerda (texto), some na direita (video nitido) */
 .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -223,7 +223,7 @@ body.has-preview-bar{padding-top:40px}
   animation:angleSpin 6s linear infinite;pointer-events:none;z-index:3}
 /* SLOT produto-detalhe: virou video (percussao no antebraco) */
 /* Fonte 720x1280 cropada p/ 720x892 (letterbox + watermark removidos no encode) = ~4:5, cover corta ~1% */
-.prod-media{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:#0d1117 url('_assets/video/produto-detalhe-poster.jpg') center/cover no-repeat}
+.prod-media{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:#0d1117 url('../../_assets/video/produto-detalhe-poster.jpg') center/cover no-repeat}
 .prod-video{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:22px;pointer-events:none}
 /* Sem movimento: mostra so o poster (bg de .prod-media), video escondido */
 @media(prefers-reduced-motion:reduce){.prod-video{display:none}}
@@ -316,8 +316,8 @@ body.has-preview-bar{padding-top:40px}
 /* ===== CARROSSEL DE PONTEIRAS (ref: DIOGO .pc-row) ===== */
 .tips-row{position:relative;overflow:hidden;margin-top:40px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)}
 .tips-track{display:flex;gap:14px;width:max-content;animation:mq-scroll 42s linear infinite;will-change:transform}
-.tips-track .tip{flex-shrink:0;width:150px;height:150px;border-radius:14px;border:1px solid rgba(99,218,248,.22);background:linear-gradient(150deg,#151922,#1B2740);display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
-.tips-track .tip img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
+.tips-track .tip{flex-shrink:0;width:150px;height:150px;border-radius:14px;border:1px solid rgba(99,218,248,.22);background:#071621;overflow:hidden}
+.tips-track .tip img{width:100%;height:100%;object-fit:cover;display:block}
 @media(hover:hover){.tips-row:hover .tips-track{animation-play-state:paused}}
 @media(prefers-reduced-motion:reduce){.tips-track{animation:none}}
 @media(max-width:560px){.tips-track .tip{width:118px;height:118px}}
@@ -355,7 +355,7 @@ body.has-preview-bar{padding-top:40px}
    position:sticky do .uso-head. O video ja fica contido pelo overflow do .uso-media. */
 .sec-uso{background:var(--black);isolation:isolate}
 /* camada 0: video */
-.uso-media{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#101115 url('_assets/video/uso-rotating-poster.jpg') center/cover no-repeat}
+.uso-media{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#101115 url('../../_assets/video/uso-rotating-poster.jpg') center/cover no-repeat}
 .uso-video{width:100%;height:100%;object-fit:cover;object-position:center;display:block;pointer-events:none}
 /* camada 1: veil — uniforme e forte (texto ocupa a largura toda; nao cabe scrim de um lado so) */
 .uso-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -690,8 +690,8 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
   <!-- VIDEO DE FUNDO: cobre a secao inteira, atras de todo o conteudo -->
   <div class="hero-media" aria-hidden="true">
     <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-           poster="_assets/video/hero-massagem-poster.jpg">
-      <source src="_assets/video/hero-massagem.mp4" type="video/mp4">
+           poster="../../_assets/video/hero-massagem-poster.jpg">
+      <source src="../../_assets/video/hero-massagem.mp4" type="video/mp4">
     </video>
   </div>
   <!-- Scrim: escurece a esquerda (texto) e perde forca em direcao a direita (video nitido) -->
@@ -717,7 +717,7 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
       <div class="hero-3d-card">
         <div class="hero-3d-glow" aria-hidden="true"></div>
         <model-viewer class="hero-model" id="heroModel"
-          src="_assets/produto/massage-gun-web.glb"
+          src="../../_assets/produto/massage-gun-web.glb"
           alt="Pistola massageadora em 3D — arraste para girar"
           camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="20deg"
           disable-zoom touch-action="pan-y" interaction-prompt="none"
@@ -799,9 +799,9 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
           <!-- SLOT produto-detalhe: video de percussao (era placeholder 800x1000) -->
           <div class="prod-media" id="slot-produto-detalhe">
             <video class="prod-video" autoplay muted loop playsinline preload="metadata"
-                   poster="_assets/video/produto-detalhe-poster.jpg"
+                   poster="../../_assets/video/produto-detalhe-poster.jpg"
                    aria-label="Pistola massageadora em uso no antebra&ccedil;o, com o display digital vis&iacute;vel">
-              <source src="_assets/video/produto-detalhe.mp4" type="video/mp4">
+              <source src="../../_assets/video/produto-detalhe.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -893,7 +893,7 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <span class="kit-spark s3" aria-hidden="true"></span>
         <span class="kit-spark s4" aria-hidden="true"></span>
         <!-- SLOT kit-maleta: imagem real (era placeholder 1000x750) -->
-        <img id="slot-kit-maleta" src="_assets/produto/kit-maleta.webp" loading="lazy" width="1200" height="896"
+        <img id="slot-kit-maleta" src="../../_assets/produto/kit-maleta.webp" loading="lazy" width="1200" height="896"
              alt="Maleta de alum&iacute;nio aberta com a pistola massageadora encaixada na espuma, as ponteiras e o cabo USB-C ao lado">
       </div>
     </div>
@@ -961,8 +961,8 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
   <!-- camada 0: video de fundo (ambiente, nao protagonista) -->
   <div class="uso-media" aria-hidden="true">
     <video class="uso-video" autoplay muted loop playsinline preload="metadata"
-           poster="_assets/video/uso-rotating-poster.jpg">
-      <source src="_assets/video/uso-rotating.mp4" type="video/mp4">
+           poster="../../_assets/video/uso-rotating-poster.jpg">
+      <source src="../../_assets/video/uso-rotating.mp4" type="video/mp4">
     </video>
   </div>
   <!-- camada 1: veil escuro uniforme — garante contraste do texto em toda a largura -->
@@ -1113,14 +1113,14 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <div class="price-medal" aria-hidden="true">
           <span class="medal-glow"></span>
           <span class="medal-ring"></span>
-          <img src="_assets/produto/display-180.webp" loading="lazy" width="344" height="344"
+          <img src="../../_assets/produto/display-180.webp" loading="lazy" width="344" height="344"
                alt="Detalhe do display digital da pistola massageadora marcando 180, com anel de luz azul aceso">
         </div>
         <!-- Medalhao 2: kit completo, sangra do canto inferior esquerdo (150px) -->
         <div class="price-medal m-kit" aria-hidden="true">
           <span class="medal-glow"></span>
           <span class="medal-ring"></span>
-          <img src="_assets/produto/kit-maleta.webp" loading="lazy" width="1200" height="896"
+          <img src="../../_assets/produto/kit-maleta.webp" loading="lazy" width="1200" height="896"
                alt="Maleta de transporte aberta com a pistola massageadora encaixada na espuma e as ponteiras ao lado">
         </div>
         <!-- Medalhao 3: pistola, canto superior esquerdo, o menor (110px) — unico que sobra
@@ -1128,7 +1128,7 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <div class="price-medal m-pistola" aria-hidden="true">
           <span class="medal-glow"></span>
           <span class="medal-ring"></span>
-          <img src="_assets/produto/pistola-flutuando.webp" loading="lazy" width="1200" height="896"
+          <img src="../../_assets/produto/pistola-flutuando.webp" loading="lazy" width="1200" height="896"
                alt="Pistola massageadora vista de lado com a ponteira esferica encaixada e o display aceso">
         </div>
         <span class="selo">20% OFF</span>
@@ -1179,7 +1179,7 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
 <section class="sec sec-faq">
   <!-- IMAGEM DE FUNDO: cobre a secao inteira, atras de todo o conteudo -->
   <div class="faq-media" aria-hidden="true">
-    <img src="_assets/produto/pistola-flutuando.webp" loading="lazy" width="1200" height="896"
+    <img src="../../_assets/produto/pistola-flutuando.webp" loading="lazy" width="1200" height="896"
          alt="">
   </div>
   <!-- Scrim: escurece a esquerda e perde forca em direcao a direita, onde a pistola aparece -->
@@ -1279,8 +1279,8 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
 (function(){
   var track=document.getElementById('tipsTrack');
   if(!track)return;
-  var imgs=['ponteira-01.png','ponteira-02.png','ponteira-03.png','ponteira-04.png','ponteira-05.png','ponteira-06.png','ponteira-07.png'];
-  var base='_assets/produto/ponteiras/';
+  var imgs=['ponteira-01.jpg','ponteira-02.jpg','ponteira-03.jpg','ponteira-04.jpg','ponteira-05.jpg','ponteira-06.jpg','ponteira-07.jpg'];
+  var base='../../_assets/produto/ponteiras/';
   var html='';
   for(var rep=0;rep<2;rep++){
     for(var i=0;i<imgs.length;i++){
