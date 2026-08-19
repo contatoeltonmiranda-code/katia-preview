@@ -893,8 +893,8 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <span class="kit-spark s3" aria-hidden="true"></span>
         <span class="kit-spark s4" aria-hidden="true"></span>
         <!-- SLOT kit-maleta: imagem real (era placeholder 1000x750) -->
-        <!-- TODO Elton: trocar esta imagem, mostra maleta que o produto nao tem -->
-        <img id="slot-kit-maleta" src="_assets/produto/kit-maleta.webp" loading="lazy" width="1200" height="896"
+        <!-- imagem do kit: modelo atual, sem maleta -->
+        <img id="slot-kit-maleta" src="_assets/produto/kit-premium.webp" loading="lazy" width="1200" height="896"
              alt="Pistola massageadora com as 4 ponteiras intercambi&aacute;veis e o cabo de carregamento USB-C ao lado">
       </div>
     </div>
@@ -1114,15 +1114,15 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <div class="price-medal" aria-hidden="true">
           <span class="medal-glow"></span>
           <span class="medal-ring"></span>
-          <img src="_assets/produto/display-180.webp" loading="lazy" width="344" height="344"
-               alt="Detalhe do display digital da pistola massageadora marcando 180, com anel de luz azul aceso">
+          <img src="_assets/produto/display-06.webp" loading="lazy" width="344" height="344"
+               alt="Detalhe da tela de toque da pistola massageadora marcando o nivel 06, com anel de luz azul aceso">
         </div>
         <!-- Medalhao 2: kit completo, sangra do canto inferior esquerdo (150px) -->
-        <!-- TODO Elton: trocar esta imagem, mostra maleta que o produto nao tem -->
+        <!-- imagem do kit: modelo atual, sem maleta -->
         <div class="price-medal m-kit" aria-hidden="true">
           <span class="medal-glow"></span>
           <span class="medal-ring"></span>
-          <img src="_assets/produto/kit-maleta.webp" loading="lazy" width="1200" height="896"
+          <img src="_assets/produto/kit-premium.webp" loading="lazy" width="1200" height="896"
                alt="Pistola massageadora com as 4 ponteiras intercambi&aacute;veis e o cabo de carregamento USB-C">
         </div>
         <!-- Medalhao 3: pistola, canto superior esquerdo, o menor (110px) — unico que sobra
@@ -1130,7 +1130,7 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
         <div class="price-medal m-pistola" aria-hidden="true">
           <span class="medal-glow"></span>
           <span class="medal-ring"></span>
-          <img src="_assets/produto/pistola-flutuando.webp" loading="lazy" width="1200" height="896"
+          <img src="_assets/produto/pistola-premium.webp" loading="lazy" width="1200" height="896"
                alt="Pistola massageadora vista de lado com a ponteira redonda encaixada e a tela de toque acesa">
         </div>
         <span class="selo">20% OFF</span>
@@ -1181,7 +1181,7 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
 <section class="sec sec-faq">
   <!-- IMAGEM DE FUNDO: cobre a secao inteira, atras de todo o conteudo -->
   <div class="faq-media" aria-hidden="true">
-    <img src="_assets/produto/pistola-flutuando.webp" loading="lazy" width="1200" height="896"
+    <img src="_assets/produto/faq-bg.webp" loading="lazy" width="1600" height="1000"
          alt="">
   </div>
   <!-- Scrim: escurece a esquerda e perde forca em direcao a direita, onde a pistola aparece -->
@@ -1277,12 +1277,11 @@ footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;b
   if(mq.addEventListener)mq.addEventListener('change',apply);
 })();
 
-<!-- TODO Elton: fotos de ponteira sao placeholder, trocar pelas do modelo real -->
 /* ===== Carrossel de ponteiras: 4 fotos reais + duplica para loop sem costura ===== */
 (function(){
   var track=document.getElementById('tipsTrack');
   if(!track)return;
-  var imgs=['ponteira-01.jpg','ponteira-02.jpg','ponteira-03.jpg','ponteira-05.jpg'];
+  var imgs=['ponteira-redonda.jpg','ponteira-chata.jpg','ponteira-conica.jpg','ponteira-u.jpg'];
   var base='_assets/produto/ponteiras/';
   var html='';
   for(var rep=0;rep<2;rep++){
